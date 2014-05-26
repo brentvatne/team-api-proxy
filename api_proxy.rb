@@ -1,4 +1,5 @@
-require 'sintra'
+require 'rubygems'
+require 'sinatra'
 require 'net/http'
 
 get "/:lat/:lon" do
