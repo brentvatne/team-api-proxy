@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/jsonp'
 require 'rest_client'
 require 'json'
 
@@ -11,8 +12,8 @@ BASE_URI = "https://api.forecast.io/forecast/#{ENV['FORECAST_IO_KEY']}/"
 
 get "/:lat_lon" do
   content_type 'application/json', charset: 'utf-8'
-
   response = JSON.parse(RestClient.get(BASE_URI + params[:lat_lon]))
-  { temperature: response['currently']['temperature'],
-    conditions: response['currently']['icon'] }.to_json
+
+  JSONP({ temperature: response['currently']['temperature'],
+          conditions: response['currently']['icon'] })
 end
