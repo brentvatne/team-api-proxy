@@ -15,5 +15,5 @@ get "/:lat_lon" do
   response = JSON.parse(RestClient.get(BASE_URI + params[:lat_lon]))
 
   JSONP({ temperature: response['currently']['temperature'],
-          conditions: response['currently']['icon'] })
+          conditions: response['currently']['icon'] }, 'jsonpFn')
 end
