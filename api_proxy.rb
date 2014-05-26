@@ -1,17 +1,18 @@
-require 'rubygems'
 require 'sinatra'
-require 'net/http'
+require 'rest_client'
+require 'json'
 
-get "/:lat/:lon" do
-  params[:lat] + ' and ' + params[:lon]
+unless ENV['RACK_ENV'] == 'production'
+  require 'dotenv'
+  Dotenv.load
+end
 
-  # uri = URI::HTTP.build(
-  #   host: '..forecast.io',
-  #   path: '/forecast',
-  #   query: '..'
-  # )
+BASE_URI = "https://api.forecast.io/forecast/#{ENV['FORECAST_IO_KEY']}/"
 
-  # content_type 'application/json', charset: 'utf-8'
-  #
-  # Net::HTTP.get(uri)
+get "/:lat_lon" do
+  content_type 'application/json', charset: 'utf-8'
+
+  response = JSON.parse(RestClient.get(BASE_URI + params[:lat_lon]))
+  { temperature: response['currently']['temperature'],
+    conditions: response['currently']['icon'] }.to_json
 end
