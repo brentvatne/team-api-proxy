@@ -5,11 +5,11 @@ GEM
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
     multi_json (1.10.1)
-    netrc (0.7.7)
+    netrc (0.7.9)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
-    rest_client (1.7.3)
+    rest_client (1.8.0)
       netrc (~> 0.7.7)
     sinatra (1.4.5)
       rack (~> 1.4)
@@ -25,6 +25,9 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
-  rest_client
+  rest_client (= 1.8.0)
   sinatra
   sinatra-jsonp
+
+BUNDLED WITH
+   1.10.3
